@@ -5,6 +5,7 @@ from topo import Topology
 import flood
 import os
 import sys
+import operator
 
 '''
 Useful CoreSwitch class functions/properties:
@@ -80,7 +81,9 @@ class AdaptivePolicy(object):
         # to find the least utilized switch.
 
         # [REPLACE WITH YOUR CODE]
-        return self.utilization.keys()[0]
+        #return self.utilization.keys()[0]
+        #return list(dict(sorted(self.utilization.items(), key=lambda item: item[1])).keys())[0]
+        return sorted(self.utilization.items(), key=operator.itemgetter(1))[0][0]
 
     def redistribute(self):
         # we're installing flows by destination, so sort by received
